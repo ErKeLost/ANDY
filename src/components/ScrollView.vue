@@ -12,7 +12,7 @@ export default {
     this.iscroll = new IScroll(this.$refs.wrapper, {
       mouseWheel: true,
       scrollBar: true,
-      scrollX:false,
+      scrollX:true,
       scrollY:true,
       probeType:3,
       disablePointer:true,

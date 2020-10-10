@@ -125,7 +125,7 @@ export default {
     }
   }
   h3 {
-    font-size: 30px;
+    font-size: 28px;
     padding-bottom: 5px;
   }
   p {

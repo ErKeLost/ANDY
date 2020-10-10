@@ -5,7 +5,7 @@
       <div class="player-wrapper">
         <PlayTabbar></PlayTabbar>
         <PlayMiddle></PlayMiddle>
-        <PlayBottom></PlayBottom>
+        <PlayBottom :totaltime=totaltime :currentTime=currentTime></PlayBottom>
       </div>
       <div class="play_bg">
         <img :src="currentsong.picUrl" alt="" />
@@ -30,6 +30,18 @@ export default {
   },
   computed: {
     ...mapGetters(["isfullscreen", "currentsong"]),
+  },
+  props:{
+    totaltime:{
+      type:Number,
+      default:0,
+      required:true
+    },
+   currentTime:{
+      type:Number,
+      default:0,
+      required:true
+    }
   },
   methods: {
     ...mapActions(["getSongLyric"]),

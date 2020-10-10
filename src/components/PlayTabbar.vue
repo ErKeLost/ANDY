@@ -108,13 +108,14 @@ export default {
     height: 50px;
   }
   h3 {
-    font-size: 35px;
+    font-size: 29px;
+    margin-top: 20px;
   }
   p {
-    padding-top: 10px;
     display: inline-block;
     font-size: 22px;
     color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-20px);
   }
 }
 </style>

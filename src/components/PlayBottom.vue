@@ -9,20 +9,20 @@
         <div class="more"></div>
       </div>
       <div class="play-progress">
-        <span>00:00</span>
+        <span ref="ele">00:00</span>
         <div class="progress-bar">
-          <div class="progress-line">
+          <div class="progress-line" ref="line">
             <div class="progress-dot"></div>
           </div>
         </div>
-        <span>00:00</span>
+        <span ref="eletotaltime">00:00</span>
       </div>
       <div class="play-controll">
         <div class="mode"></div>
         <div class="prev" @click="prev"></div>
         <div class="play" @click="play" ref="play"></div>
         <div class="next" @click="next"></div>
-        <div class="favourite" ></div>
+        <div class="favourite"></div>
       </div>
     </div>
   </div>
@@ -45,8 +45,25 @@ export default {
     prev() {
       this.setcurrentindex(this.currentindex - 1);
     },
+    formarttime(time) {
+      let differtime = time;
+      let day = Math.floor(differtime / (60 * 60 * 24));
+      day = day >= 10 ? day : "0" + day;
+      let hour = Math.floor((differtime / (60 * 60)) % 24);
+      hour = hour >= 10 ? hour : "0" + hour;
+      let minute = Math.floor((differtime / 60) % 60);
+      minute = minute >= 10 ? minute : "0" + minute;
+      let second = Math.floor(differtime % 60);
+      second = second >= 10 ? second : "0" + second;
+      return {
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second,
+      };
+    },
   },
-  
+
   watch: {
     isplaying(newvalue, oldvalue) {
       if (newvalue) {
@@ -54,6 +71,30 @@ export default {
       } else {
         this.$refs.play.classList.remove("active");
       }
+    },
+    totaltime(newvalue, oldvalue) {
+      let time = this.formarttime(newvalue);
+      this.$refs.eletotaltime.innerHTML = time.minute + ":" + time.second;
+    },
+    currentTime(newvalue, oldvalue) {
+      // 格式化当前播放时间
+      let time = this.formarttime(newvalue);
+      this.$refs.ele.innerHTML = time.minute + ":" + time.second;
+      // 播放时间计算比例
+      let value = newvalue / this.totaltime * 100
+      this.$refs.line.style.width = value + '%'
+    },
+  },
+  props: {
+    totaltime: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    currentTime: {
+      type: Number,
+      default: 0,
+      required: true,
     },
   },
 };
@@ -120,12 +161,12 @@ export default {
       margin: 20px 30px;
       height: 3px;
       background: rgba(255, 255, 255, 0.4);
-      position: relative;
+      // position: relative;
       .progress-line {
-        width: 50%;
+        width: 0%;
         height: 100%;
         background: rgba(255, 255, 255, 1);
-        // position: relative;
+        position: relative;
         .progress-dot {
           width: 12px;
           height: 12px;
@@ -133,7 +174,7 @@ export default {
           border-radius: 50%;
           position: absolute;
           top: 50%;
-          left: 50%;
+          left: 100%;
           transform: translateY(-50%);
         }
       }
@@ -143,7 +184,7 @@ export default {
     // background: red;
     width: 90%;
     margin: 0 auto;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     justify-content: space-around;
     align-items: center;
