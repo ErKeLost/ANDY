@@ -1,9 +1,9 @@
 <template>
   <div class="player">
-    <NormalPlayer ref="hol"></NormalPlayer>
+    <NormalPlayer ref="hol" :totaltime=totaltime :currentTime=currentTime></NormalPlayer>
     <MinniPlay @showlist="showlist" ref="bottshow"></MinniPlay>
     <ListPlayer ref="listplayer" @tototo="tototo"> </ListPlayer>
-    <audio :src="currentsong.url" ref="audio"></audio>
+    <audio :src="currentsong.url" ref="audio" @timeupdate="timeupdate"></audio>
   </div>
 </template>
 <script>
@@ -34,9 +34,13 @@ export default {
       this.$refs.listplayer.hiol();
       this.$refs.bottshow.hidea();
     },
+    timeupdate(e){
+      this.currentTime = e.target.currentTime
+      // console.log(e.target.currentTime);
+    }
   },
   computed: {
-    ...mapGetters(["currentsong", "isplaying"]),
+    ...mapGetters(["currentsong", "isplaying",'curtime']),
   },
   watch: {
     isplaying(newvalue, oldvalue) {
@@ -46,6 +50,21 @@ export default {
         this.$refs.audio.pause();
       }
     },
+    curtime(newvalue, oldvalue){
+      this.$refs.audio.currentTime = newvalue
+    }
+  },
+  mounted() {
+    this.$refs.audio.oncanplay = () => {
+      this.totaltime = this.$refs.audio.duration;
+      // console.log(this.totaltime);
+    };
+  },
+  data() {
+    return{
+      totaltime: 0,
+      currentTime:0
+    }
   },
 };
 </script>

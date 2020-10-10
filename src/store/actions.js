@@ -5,7 +5,8 @@ import {
   SET_SONG_DETAIL,
   SET_SONG_LYRIC,
   SET_CURRENT_INDEX,
-  SET_DEL_SONG
+  SET_DEL_SONG,
+  SET_CURRENT_TIME
 } from './mutations.type'
 import {
   getSongDetail,
@@ -83,5 +84,10 @@ export default {
   }, flag) {
     commit('SET_DEL_SONG', flag)
   },
+  setcurtime({
+    commit
+  },time){
+    commit('SET_CURRENT_TIME',time)
+  }
 
 }

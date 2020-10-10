@@ -7,5 +7,6 @@ export default{
   currentsong:{},
   currentindex : 0,
   currentLyric: {},
+  curtime:0
 
 }

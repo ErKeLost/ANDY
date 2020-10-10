@@ -79,6 +79,10 @@ export default {
     padding: 20px;
     box-sizing: border-box;
     background: #fff;
+    &:last-of-type{
+      padding-bottom: 200px;
+    }
+    
   }
   .bottom-top {
     display: flex;

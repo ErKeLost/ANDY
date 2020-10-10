@@ -92,7 +92,7 @@ export default {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
-        font-size: 27px;
+        font-size: 28px;
       }
     }
   }

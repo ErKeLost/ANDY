@@ -10,7 +10,7 @@
       </div>
       <div class="play-progress">
         <span ref="ele">00:00</span>
-        <div class="progress-bar">
+        <div class="progress-bar" @click="proclick" ref="pro">
           <div class="progress-line" ref="line">
             <div class="progress-dot"></div>
           </div>
@@ -35,7 +35,7 @@ export default {
     ...mapGetters(["isplaying", "currentindex"]),
   },
   methods: {
-    ...mapActions(["setisplaying", "setcurrentindex"]),
+    ...mapActions(["setisplaying", "setcurrentindex","setcurtime"]),
     play() {
       this.setisplaying(!this.isplaying);
     },
@@ -62,6 +62,19 @@ export default {
         second: second,
       };
     },
+    proclick(e) {
+      // 计算进度条的位置
+      let normalleft = e.target.offsetLeft;
+      let eventleft = e.pageX;
+      let clickleft = eventleft - normalleft;
+      let prowidth = e.target.offsetWidth;
+      let value = clickleft / prowidth ;
+      this.$refs.line.style.width = (value * 100) + '%';
+      // 计算从什么时候开始播放
+      let currentTime = this.totaltime * value
+      // console.log(currentTime);
+      this.setcurtime(currentTime)
+    },
   },
 
   watch: {
@@ -81,8 +94,8 @@ export default {
       let time = this.formarttime(newvalue);
       this.$refs.ele.innerHTML = time.minute + ":" + time.second;
       // 播放时间计算比例
-      let value = newvalue / this.totaltime * 100
-      this.$refs.line.style.width = value + '%'
+      let value = (newvalue / this.totaltime) * 100;
+      this.$refs.line.style.width = value + "%";
     },
   },
   props: {
@@ -161,7 +174,7 @@ export default {
       margin: 20px 30px;
       height: 3px;
       background: rgba(255, 255, 255, 0.4);
-      // position: relative;
+      position: relative;
       .progress-line {
         width: 0%;
         height: 100%;
