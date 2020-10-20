@@ -10,11 +10,12 @@ const Myself = (resolve) => {
     resolve(module)
   })
 }
-const Find = (resolve) => {
-  import('../views/Find').then((module) => {
-    resolve(module)
-  })
-}
+// const Find = (resolve) => {
+//   import('../views/Find').then((module) => {
+//     resolve(module)
+//   })
+// }
+const Find = () => import('../views/Find')
 const Detail = (resolve) => {
   import('../views/Detail').then((module) => {
     resolve(module)

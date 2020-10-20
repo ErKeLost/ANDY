@@ -109,13 +109,13 @@ export default {
   }
   h3 {
     font-size: 29px;
-    margin-top: 20px;
+    // margin-top: 20px;
   }
   p {
     display: inline-block;
     font-size: 22px;
     color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-20px);
+    // transform: translateY(-20px);
   }
 }
 </style>

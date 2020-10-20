@@ -32,16 +32,24 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "PlayBottom",
   computed: {
-    ...mapGetters(["isplaying", "currentindex"]),
+    ...mapGetters(["isplaying", "currentindex", "curtime"]),
   },
   methods: {
-    ...mapActions(["setisplaying", "setcurrentindex","setcurtime"]),
+    ...mapActions(["setisplaying", "setcurrentindex", "setcurtime"]),
     play() {
       this.setisplaying(!this.isplaying);
     },
     next() {
       this.setcurrentindex(this.currentindex + 1);
+      // this.setisplaying(!this.isplaying);
+      // this.$refs.audio.play()
     },
+
+    // play() {
+    //   //方法定义
+    //   // console.log("子组件function测试！");
+    // },
+
     prev() {
       this.setcurrentindex(this.currentindex - 1);
     },
@@ -67,13 +75,14 @@ export default {
       let normalleft = e.target.offsetLeft;
       let eventleft = e.pageX;
       let clickleft = eventleft - normalleft;
-      let prowidth = e.target.offsetWidth;
-      let value = clickleft / prowidth ;
-      this.$refs.line.style.width = (value * 100) + '%';
+      // let prowidth = e.target.offsetWidth;
+      let prowidth = this.$refs.pro.offsetWidth;
+      let value = clickleft / prowidth;
+      this.$refs.line.style.width = value * 100 + "%";
       // 计算从什么时候开始播放
-      let currentTime = this.totaltime * value
+      let currentTime = this.totaltime * value;
       // console.log(currentTime);
-      this.setcurtime(currentTime)
+      this.setcurtime(currentTime);
     },
   },
 
