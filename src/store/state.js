@@ -6,7 +6,8 @@ export default{
   songs:[],
   currentsong:{},
   currentindex : 0,
-  currentLyric: {},
+  currentlyric: {},
+  favoriteList:[],
   curtime:0
 
 }

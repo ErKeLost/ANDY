@@ -31,18 +31,7 @@ export default {
   computed: {
     ...mapGetters(["isfullscreen", "currentsong"]),
   },
-  props:{
-    totaltime:{
-      type:Number,
-      default:0,
-      required:true
-    },
-   currentTime:{
-      type:Number,
-      default:0,
-      required:true
-    }
-  },
+
   methods: {
     ...mapActions(["getSongLyric"]),
 
@@ -72,12 +61,24 @@ export default {
     },
   },
   watch: {
-    // currentsong(newValue, oldValue) {
-    //   //  if (newValue.id === undefined) {
-    //   //    return
-    //   // }
-    //   this.getSongLyric(newValue.id);
-    // },
+    currentsong(newValue, oldValue) {
+       if (newValue.id === undefined) {
+         return
+      }
+      this.getSongLyric(newValue.id);
+    },
+  },
+    props:{
+    totaltime:{
+      type:Number,
+      default:0,
+      required:true
+    },
+   currentTime:{
+      type:Number,
+      default:0,
+      required:true
+    }
   },
 };
 </script>

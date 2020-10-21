@@ -2,7 +2,7 @@
   <div>
     <div class="player-bottom">
       <div class="play-top">
-        <div class="fav"></div>
+        <div class="fav" @click="favorite" :class="{'active':isfavorite(currentsong)}"></div>
         <div class="down"></div>
         <div class="sing"></div>
         <div class="comment"></div>
@@ -10,8 +10,8 @@
       </div>
       <div class="play-progress">
         <span ref="ele">00:00</span>
-        <div class="progress-bar" @click="proclick" ref="pro">
-          <div class="progress-line" ref="line">
+        <div class="progress-bar" @click="proclick" ref="progressBar">
+          <div class="progress-line" ref="progressLine">
             <div class="progress-dot"></div>
           </div>
         </div>
@@ -32,12 +32,18 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "PlayBottom",
   computed: {
-    ...mapGetters(["isplaying", "currentindex", "curtime"]),
+    ...mapGetters(["isplaying", "currentindex", "curtime","currentsong","favoriteList"]),
   },
   methods: {
-    ...mapActions(["setisplaying", "setcurrentindex", "setcurtime"]),
+    ...mapActions(["setisplaying", "setcurrentindex", "setcurtime","setFavoriteSong"]),
     play() {
       this.setisplaying(!this.isplaying);
+    },
+    isfavorite(song){
+      let result  = this.favoriteList.find(function(currentValue){
+        return currentValue === song
+      })
+      return result !== undefined
     },
     next() {
       this.setcurrentindex(this.currentindex + 1);
@@ -52,6 +58,10 @@ export default {
 
     prev() {
       this.setcurrentindex(this.currentindex - 1);
+    },
+    favorite(){
+      this.setFavoriteSong(this.currentsong)
+      // console.log(a);
     },
     formarttime(time) {
       let differtime = time;
@@ -72,13 +82,14 @@ export default {
     },
     proclick(e) {
       // 计算进度条的位置
-      let normalleft = e.target.offsetLeft;
+      // let normalleft = e.target.offsetLeft;
+      let normalleft = this.$refs.progressBar.offsetLeft
       let eventleft = e.pageX;
       let clickleft = eventleft - normalleft;
       // let prowidth = e.target.offsetWidth;
-      let prowidth = this.$refs.pro.offsetWidth;
+      let prowidth = this.$refs.progressBar.offsetWidth;
       let value = clickleft / prowidth;
-      this.$refs.line.style.width = value * 100 + "%";
+      this.$refs.progressLine.style.width = value * 100 + "%";
       // 计算从什么时候开始播放
       let currentTime = this.totaltime * value;
       // console.log(currentTime);
@@ -104,7 +115,7 @@ export default {
       this.$refs.ele.innerHTML = time.minute + ":" + time.second;
       // 播放时间计算比例
       let value = (newvalue / this.totaltime) * 100;
-      this.$refs.line.style.width = value + "%";
+      this.$refs.progressLine.style.width = value + "%";
     },
   },
   props: {
@@ -143,6 +154,12 @@ export default {
       background: url("../assets/images/favourite.png");
       background-repeat: no-repeat;
       background-size: 70%;
+       &.active{
+      background: url("../assets/images/ppt.png");
+      background-repeat: no-repeat;
+      background-size: 70%;
+      background-position: 0px 0px;
+      }
     }
     .down {
       background: url("../assets/images/downaa.png");
@@ -248,6 +265,7 @@ export default {
       background-repeat: no-repeat;
       background-size: 60%;
       background-position: 15px 15px;
+     
     }
   }
 }

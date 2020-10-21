@@ -6,7 +6,8 @@ import {
   SET_SONG_LYRIC,
   SET_CURRENT_INDEX,
   SET_DEL_SONG,
-  SET_CURRENT_TIME
+  SET_CURRENT_TIME,
+  SET_FAVORITE_SONG
 } from './mutations.type'
 import {
   getSongDetail,
@@ -68,9 +69,9 @@ export default {
     commit(SET_SONG_DETAIL, list)
   },
   async getSongLyric ({ commit }, id) {
-    let result = await getSongLyric({ id: id })
-    // console.log(result.lrc.lyric)
+    let result = await getSongLyric({ id : id })
     console.log(result);
+    // console.log(result.lrc.lyric)
     let obj = parselyric(result.lrc.lyric)
     commit(SET_SONG_LYRIC, obj)
   },
@@ -88,6 +89,11 @@ export default {
     commit
   },time){
     commit('SET_CURRENT_TIME',time)
+  },
+  setFavoriteSong({
+    commit
+  },song){
+      commit(SET_FAVORITE_SONG,song)
   }
 
 }

@@ -10,7 +10,9 @@
         <div class="cd-wrapper" ref="cdwrapper">
           <img :src="currentsong.picUrl" alt="" />
         </div>
-        <p>asdadsadwadasdasdasda</p>
+        <p>ERKELOST</p>
+        <p>ALLWAYS</p>
+        <p>ADNYa</p>
       </swiper-slide>
       <swiper-slide class="lyric">
         <ScrollView>
@@ -168,6 +170,11 @@ export default {
     text-align: center;
     font-size: 30px;
     color: white;
+    // white-space: 50px;
+    // white-space: 15px ;
+    // word-spacing: 15px;
+    letter-spacing: 15px;
+    padding-bottom: 35px;
   }
 }
 .lyric {

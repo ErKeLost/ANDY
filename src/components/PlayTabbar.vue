@@ -110,6 +110,7 @@ export default {
   h3 {
     font-size: 29px;
     // margin-top: 20px;
+    transform: translateY(20px);
   }
   p {
     display: inline-block;

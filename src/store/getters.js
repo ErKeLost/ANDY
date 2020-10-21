@@ -25,13 +25,16 @@ export default {
     }
     return obj
   },
-  currentLyric(state){
-    return state.currentLyric
+  currentlyric(state){
+    return state.currentlyric
   },
   currentindex(state){
     return state.currentindex
   },
   curtime(state){
     return state.curtime
+  },
+  favoriteList(state){
+    return state.favoriteList
   }
 }

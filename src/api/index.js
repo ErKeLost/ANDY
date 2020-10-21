@@ -6,7 +6,7 @@ export const getNewSong = () => Network.get('personalized/newsong');
 export const getPlayList = (data) => Network.get('playlist/detail',data);
 export const getAlbum = (data) => Network.get('album',data);
 export const getSongDetail = (data) => Network.get('song/detail',data);
-export const getSongLyric = (data) => Network.get('lyric',data);
+export const getSongLyric = (data) => Network.get('lyric', data)
 export const getSongURL = (data) => Network.get('song/url',data);
 
 
