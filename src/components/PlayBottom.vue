@@ -29,6 +29,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { formarttime } from "../tools/tools";
 export default {
   name: "PlayBottom",
   computed: {
@@ -41,7 +42,7 @@ export default {
     },
     isfavorite(song){
       let result  = this.favoriteList.find(function(currentValue){
-        return currentValue === song
+        return currentValue.id === song.id
       })
       return result !== undefined
     },
@@ -63,23 +64,7 @@ export default {
       this.setFavoriteSong(this.currentsong)
       // console.log(a);
     },
-    formarttime(time) {
-      let differtime = time;
-      let day = Math.floor(differtime / (60 * 60 * 24));
-      day = day >= 10 ? day : "0" + day;
-      let hour = Math.floor((differtime / (60 * 60)) % 24);
-      hour = hour >= 10 ? hour : "0" + hour;
-      let minute = Math.floor((differtime / 60) % 60);
-      minute = minute >= 10 ? minute : "0" + minute;
-      let second = Math.floor(differtime % 60);
-      second = second >= 10 ? second : "0" + second;
-      return {
-        day: day,
-        hour: hour,
-        minute: minute,
-        second: second,
-      };
-    },
+   
     proclick(e) {
       // 计算进度条的位置
       // let normalleft = e.target.offsetLeft;
@@ -106,12 +91,12 @@ export default {
       }
     },
     totaltime(newvalue, oldvalue) {
-      let time = this.formarttime(newvalue);
+      let time =formarttime(newvalue);
       this.$refs.eletotaltime.innerHTML = time.minute + ":" + time.second;
     },
     currentTime(newvalue, oldvalue) {
       // 格式化当前播放时间
-      let time = this.formarttime(newvalue);
+      let time =formarttime(newvalue);
       this.$refs.ele.innerHTML = time.minute + ":" + time.second;
       // 播放时间计算比例
       let value = (newvalue / this.totaltime) * 100;

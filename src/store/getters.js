@@ -25,8 +25,8 @@ export default {
     }
     return obj
   },
-  currentlyric(state){
-    return state.currentlyric
+  currentLyric(state){
+    return state.currentLyric
   },
   currentindex(state){
     return state.currentindex

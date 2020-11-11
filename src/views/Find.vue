@@ -1,4 +1,5 @@
 <template>
+<transition appear="">
   <div class="find">
     <div class="find-wrapper">
       <ScrollView>
@@ -27,6 +28,7 @@
       <router-view></router-view>
     </transition>
   </div>
+</transition>
 </template>
 <script>
 // import func from "../../vue-temp/vue-editor-bridge";
@@ -117,7 +119,7 @@ export default {
 }
 
 .v-enter {
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
 .v-enter-to {
   transform: translateX(0);

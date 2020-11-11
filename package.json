@@ -11,6 +11,7 @@
     "better-scroll": "^2.0.4",
     "core-js": "^3.6.5",
     "fastclick": "^1.0.6",
+    "gsap": "^3.5.1",
     "iscroll": "^5.2.0",
     "swiper": "^6.3.2",
     "velocity-animate": "^1.5.2",

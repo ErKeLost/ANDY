@@ -28,7 +28,7 @@ export default {
     ListPlayer,
   },
   methods: {
-    ...mapActions(["setcurrentindex"]),
+    ...mapActions(["setcurrentindex","setFavoriteList"]),
     showlist() {
       this.$refs.listplayer.show();
       this.$refs.bottshow.showa();
@@ -60,7 +60,7 @@ export default {
     this.$refs.audio.play(); //调用
   },
   computed: {
-    ...mapGetters(["currentsong", "isplaying", "curtime", "currentindex"]),
+    ...mapGetters(["currentsong", "isplaying", "curtime", "currentindex"," favoriteList"]),
   },
   watch: {
     isplaying(newValue, oldValue) {
@@ -92,6 +92,17 @@ export default {
     curtime(newvalue, oldvalue) {
       this.$refs.audio.currentTime = newvalue;
     },
+     favoriteList(newvalue,oldvalue){
+       window.localStorage.setItem(' favoriteList',JSON.stringify(newvalue))
+
+     }
+  },
+  created(){
+      let list = JSON.parse(window.localStorage.getItem(' favoriteList'))
+      if(list === null){
+        return
+      }
+      this.setFavoriteList(list)
   },
   mounted() {
     this.$refs.audio.oncanplay = () => {

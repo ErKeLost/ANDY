@@ -1,6 +1,6 @@
 <template>
   <div class="tabbar">
-    <div class="left">
+    <div class="left" @click="accountClick">
       <router-link tag="div" to="/pol"> </router-link>
     </div>
     <div class="center">
@@ -25,7 +25,13 @@
 <script>
 export default {
   name: "Tabbar",
+  methods:{
+    accountClick(){
+      this.$router.push('/pol')
+    }
+  }
 };
+
 </script>
 <style lang="scss" scoped>
 @import "../assets/css/variable";
